@@ -5,17 +5,17 @@ Rust bindings for SecurityTrails API
 ## Features (Unchecked items are under development)
 - [x] Ping
 - [x] Usage
-- [] Details
+- [ ] Details
 - [x] Subdomains
-- [] Tags
-- [] WHOIS
-- [] Search
-- [] Statistics
-- [] Associated domains
-- [] DNS History
-- [] WHOIS History
-- [] IP Neighbors
-- [] IP Statistics
+- [ ] Tags
+- [ ] WHOIS
+- [ ] Search
+- [ ] Statistics
+- [ ] Associated domains
+- [ ] DNS History
+- [ ] WHOIS History
+- [ ] IP Neighbors
+- [ ] IP Statistics
 
 
 ## Example
