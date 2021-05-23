@@ -1,10 +1,10 @@
 use reqwest::Url;
-use super::json_objects::{Details, Subdomains};
+use super::json_objects::{Ping, Usage};
 use super::request;
 
-pub fn get_details(base_url: String, api_key: String, domain: String) -> Result<Details, String> {
-    let domain_url: String = format!("{}domain/{}", base_url, domain);
-    let url = match Url::parse(domain_url.as_str()){
+pub fn ping(base_url: String, api_key: String) -> Result<Ping, String> {
+    let ping_url: String = format!("{}ping", base_url);
+    let url = match Url::parse(ping_url.as_str()){
         Ok(url) => url,
         Err(e) => return Err(e.to_string()),
     };
@@ -17,19 +17,19 @@ pub fn get_details(base_url: String, api_key: String, domain: String) -> Result<
             Ok(res_text) => res_text,
             Err(e) => return Err(e.to_string()),
         };
-        let d_json: Details = match serde_json::from_str(res_text.as_str()) {
-            Ok(d_json) => d_json,
+        let ping_json: Ping = match serde_json::from_str(res_text.as_str()) {
+            Ok(ping_json) => ping_json,
             Err(e) => return Err(e.to_string()),
         };
-        Ok(d_json)
+        Ok(ping_json)
     }else{
         Err(res.status().to_string())
     }
 }
 
-pub fn get_subdomains(base_url: String, api_key: String, domain: String) -> Result<Subdomains, String> {
-    let subdomain_url: String = format!("{}domain/{}/subdomains", base_url, domain);
-    let url = match Url::parse_with_params(subdomain_url.as_str(), &[("children_only", "false"), ("include_inactive", "true")]){
+pub fn get_usage(base_url: String, api_key: String) -> Result<Usage, String> {
+    let usage_url: String = format!("{}account/usage", base_url);
+    let url = match Url::parse(usage_url.as_str()){
         Ok(url) => url,
         Err(e) => return Err(e.to_string()),
     };
@@ -42,12 +42,13 @@ pub fn get_subdomains(base_url: String, api_key: String, domain: String) -> Resu
             Ok(res_text) => res_text,
             Err(e) => return Err(e.to_string()),
         };
-        let sd_json: Subdomains = match serde_json::from_str(res_text.as_str()) {
-            Ok(sd_json) => sd_json,
+        let usage_json: Usage = match serde_json::from_str(res_text.as_str()) {
+            Ok(usage_json) => usage_json,
             Err(e) => return Err(e.to_string()),
         };
-        Ok(sd_json)
+        Ok(usage_json)
     }else{
         Err(res.status().to_string())
     }
 }
+

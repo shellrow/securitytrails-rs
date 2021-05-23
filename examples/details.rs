@@ -1,4 +1,3 @@
-use std::fs;
 use securitytrails_rs::Client;
 
 fn main() {
@@ -13,19 +12,17 @@ fn main() {
         },
     };
     println!("ping: {}", ping.success);
-    let subdomains = match client.get_subdomains(domain) {
-        Ok(subdomains) => subdomains,
+    let details = match client.get_details(domain) {
+        Ok(details) => details,
         Err(e) => {
             println!("{}", e);
             return;
         },
     };
-    println!("endpoint: {}", subdomains.endpoint);
-    //println!("subdomains: {:?}", subdomains.subdomains);
-    let joined = subdomains.subdomains.join("\n");
-    let save_path = format!("{}_subdomains.txt", domain);
-    fs::write(save_path.clone(), joined).expect("Unable to write file");
-    println!("subdomains: Saved to {}", save_path);
+    println!("host_name: {}", details.hostname);
+    println!("endpoint: {}", details.endpoint);
+    println!("current_dns: {:?}", details.current_dns);
+    println!("alexa_rank: {}", details.alexa_rank);
     let usage = match client.get_usage() {
         Ok(usage) => usage,
         Err(e) => {

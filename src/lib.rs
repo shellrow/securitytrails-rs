@@ -1,7 +1,11 @@
 mod json_objects;
+mod request;
 mod domains;
+mod general;
+mod sys;
 
-use json_objects::Subdomains;
+use json_objects::{Ping, Usage};
+use json_objects::{Details, Subdomains};
 
 pub const BASE_URL_V1: &str = "https://api.securitytrails.com/v1/";
 
@@ -29,6 +33,15 @@ impl Client {
     }
     pub fn get_base_url(&self) -> String {
         return self.base_url.clone();
+    }
+    pub fn ping(&self) -> Result<Ping, String> {
+        general::ping(self.base_url.clone(), self.api_key.clone())
+    }
+    pub fn get_usage(&self) -> Result<Usage, String> {
+        general::get_usage(self.base_url.clone(), self.api_key.clone())
+    }
+    pub fn get_details(&self, domain: &str) -> Result<Details, String> {
+        domains::get_details(self.base_url.clone(), self.api_key.clone(), domain.to_string())
     }
     pub fn get_subdomains(&self, domain: &str) -> Result<Subdomains, String> {
         domains::get_subdomains(self.base_url.clone(), self.api_key.clone(), domain.to_string())
