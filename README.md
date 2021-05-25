@@ -5,7 +5,7 @@ Rust bindings for SecurityTrails API
 ## Features (Unchecked items are under development)
 - [x] Ping
 - [x] Usage
-- [ ] Details
+- [x] Details
 - [x] Subdomains
 - [ ] Tags
 - [ ] WHOIS

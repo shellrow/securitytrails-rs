@@ -1,11 +1,10 @@
-mod json_objects;
+pub mod json_objects;
 mod request;
 mod domains;
 mod general;
 mod sys;
 
-use json_objects::{Ping, Usage};
-use json_objects::{Details, Subdomains};
+use json_objects::*;
 
 pub const BASE_URL_V1: &str = "https://api.securitytrails.com/v1/";
 
