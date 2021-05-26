@@ -1,4 +1,8 @@
-# securitytrails-rs
+[crates-badge]: https://img.shields.io/crates/v/securitytrails-rs.svg
+[crates-url]: https://crates.io/crates/securitytrails-rs
+[license-badge]: https://img.shields.io/crates/l/securitytrails-rs.svg
+[examples-url]: https://github.com/shellrow/securitytrails-rs/tree/main/examples
+# securitytrails-rs [![Crates.io][crates-badge]][crates-url] ![License][license-badge]
 Rust bindings for SecurityTrails API  
 **Currently under development and only some features are supported**  
 
