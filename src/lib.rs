@@ -45,4 +45,10 @@ impl Client {
     pub fn get_subdomains(&self, domain: &str) -> Result<Subdomains, String> {
         domains::get_subdomains(self.base_url.clone(), self.api_key.clone(), domain.to_string())
     }
+    pub fn get_tags(&self, domain: &str) -> Result<Tags, String> {
+        domains::get_tags(self.base_url.clone(), self.api_key.clone(), domain.to_string())
+    }
+    pub fn get_whois(&self, domain: &str) -> Result<Whois, String> {
+        domains::get_whois(self.base_url.clone(), self.api_key.clone(), domain.to_string())
+    }
 }

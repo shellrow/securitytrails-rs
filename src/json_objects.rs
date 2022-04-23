@@ -113,3 +113,50 @@ pub struct Subdomains {
     pub endpoint: String,
     pub subdomains: Vec<String>,
 }
+
+#[derive(Serialize, Deserialize, Debug)]
+pub struct Tags {
+    pub endpoint: String,
+    pub tags: Vec<String>,
+}
+
+#[derive(Serialize, Deserialize, Debug)]
+pub struct Contact {
+    pub city: Option<String>,
+    pub country: Option<String>,
+    #[serde(rename = "countryCode")]
+    pub country_code: Option<String>,
+    pub email: Option<String>,
+    pub name: Option<String>,
+    pub name_count: Option<u32>,
+    pub organization: Option<String>,
+    pub organization_count: Option<u32>,
+    #[serde(rename = "postalCode")]
+    pub postal_code: Option<String>,
+    pub state: Option<String>,
+    pub street1: Option<String>,
+    pub telephone: Option<String>,
+    #[serde(rename = "type")]
+    pub contact_type: Option<String>,
+}
+
+#[derive(Serialize, Deserialize, Debug)]
+pub struct Whois {
+    #[serde(rename = "contactEmail")]
+    pub contact_email: String,
+    pub contacts: Vec<Contact>,
+    #[serde(rename = "createdDate")]
+    pub created_date: String,
+    pub domain: String,
+    pub endpoint: String,
+    #[serde(rename = "expiresDate")]
+    pub expires_date: String,
+    #[serde(rename = "nameServers")]
+    pub name_servers: Vec<String>,
+    pub private_registration: bool,
+    #[serde(rename = "registrarName")]
+    pub registrar_name: String,
+    pub status: String,
+    #[serde(rename = "updatedDate")]
+    pub updated_date: String,
+}

@@ -11,8 +11,8 @@ Rust bindings for SecurityTrails API
 - [x] Usage
 - [x] Details
 - [x] Subdomains
-- [ ] Tags
-- [ ] WHOIS
+- [x] Tags
+- [x] WHOIS
 - [ ] Search
 - [ ] Statistics
 - [ ] Associated domains

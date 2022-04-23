@@ -1,5 +1,5 @@
 use reqwest::Url;
-use super::json_objects::{Details, Subdomains};
+use super::json_objects::{Details, Subdomains, Tags, Whois};
 use super::request;
 
 pub fn get_details(base_url: String, api_key: String, domain: String) -> Result<Details, String> {
@@ -47,6 +47,56 @@ pub fn get_subdomains(base_url: String, api_key: String, domain: String) -> Resu
             Err(e) => return Err(e.to_string()),
         };
         Ok(sd_json)
+    }else{
+        Err(res.status().to_string())
+    }
+}
+
+pub fn get_tags(base_url: String, api_key: String, domain: String) -> Result<Tags, String> {
+    let tags_url: String = format!("{}domain/{}/tags", base_url, domain);
+    let url = match Url::parse(tags_url.as_str()){
+        Ok(url) => url,
+        Err(e) => return Err(e.to_string()),
+    };
+    let res = match request::get(url, api_key) {
+        Ok(res) => res,
+        Err(e) => return Err(e.to_string()),
+    };
+    if res.status().is_success() {
+        let res_text = match res.text() {
+            Ok(res_text) => res_text,
+            Err(e) => return Err(e.to_string()),
+        };
+        let tags_json: Tags = match serde_json::from_str(res_text.as_str()) {
+            Ok(tags_json) => tags_json,
+            Err(e) => return Err(e.to_string()),
+        };
+        Ok(tags_json)
+    }else{
+        Err(res.status().to_string())
+    }
+}
+
+pub fn get_whois(base_url: String, api_key: String, domain: String) -> Result<Whois, String> {
+    let whois_url: String = format!("{}domain/{}/whois", base_url, domain);
+    let url = match Url::parse(whois_url.as_str()){
+        Ok(url) => url,
+        Err(e) => return Err(e.to_string()),
+    };
+    let res = match request::get(url, api_key) {
+        Ok(res) => res,
+        Err(e) => return Err(e.to_string()),
+    };
+    if res.status().is_success() {
+        let res_text = match res.text() {
+            Ok(res_text) => res_text,
+            Err(e) => return Err(e.to_string()),
+        };
+        let whois_json: Whois = match serde_json::from_str(res_text.as_str()) {
+            Ok(tags_json) => tags_json,
+            Err(e) => return Err(e.to_string()),
+        };
+        Ok(whois_json)
     }else{
         Err(res.status().to_string())
     }
